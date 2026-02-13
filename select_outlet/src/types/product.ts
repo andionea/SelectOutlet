@@ -6,5 +6,9 @@ export interface Product {
   outletPrice: number;
   image: string;
   category: string;
-  isNew?: boolean;
+  description?: string;
+  sizes: string[];      // From your 'Marimi' multiple select
+  isNew: boolean;
+  hasDiscount: boolean; // From your 'Discount' checkbox
+  stock: number;
 }
