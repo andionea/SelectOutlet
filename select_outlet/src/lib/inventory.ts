@@ -20,6 +20,9 @@ interface GoogleSheetRecord {
 export async function getInventory(categoryName?: string): Promise<Product[]> {
   const GOOGLE_SHEET_API_URL = process.env.NEXT_PUBLIC_GOOGLE_SHEET_API_URL;
 
+  // TEMPORARY DEBUG: This will show up in Vercel "Logs" tab
+  console.log("API URL check:", GOOGLE_SHEET_API_URL ? "Defined" : "UNDEFINED");
+
   // Verificare de siguranță
   if (!GOOGLE_SHEET_API_URL) {
     console.error("Eroare: NEXT_PUBLIC_GOOGLE_SHEET_API_URL nu este definit în .env.local");
