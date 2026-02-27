@@ -7,7 +7,7 @@ import { useCart } from '@/src/lib/store'; // Adjust this path if your store is 
 
 // Mock data - in a real scenario, you'd fetch this based on the [id]
 const productData = {
-  id: "4", // Matches your dummy data ID
+  id: "4",
   name: "Classic Elegant Evening Dress",
   brand: "Gia Collection",
   originalPrice: 899,
@@ -15,7 +15,10 @@ const productData = {
   description: "A stunning floor-length evening gown crafted from premium velvet. Features a subtle side slit and elegant draping, perfect for high-end events and gala dinners.",
   sizes: ["XS", "S", "M", "L", "XL"],
   image: "https://res.cloudinary.com/dff92deol/image/upload/v1770562611/Bluza-fete-CA-00633_vikcub.jpg",
-  category: "Women"
+  category: "Women",
+  isNew: true,
+  hasDiscount: false,
+  stock: 5
 };
 
 export default function ProductPage() {
