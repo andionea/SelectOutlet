@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { ChevronDown } from 'lucide-react';
 
 export default function Hero() {
   return (
@@ -6,7 +7,7 @@ export default function Hero() {
       {/* Background Image - Styled to stay centered on all screens */}
       <div 
         className="absolute inset-0 bg-cover bg-center md:bg-fixed transition-transform duration-1000 hover:scale-105"
-        style={{ backgroundImage: "url('/hero-image.jpg')" }} // Use your Cloudinary/Local hero path
+        style={{ backgroundImage: "url('https://res.cloudinary.com/dff92deol/image/upload/v1772209343/Gemini_Generated_Image_k6ec3yk6ec3yk6ec_v0q3xe.png')" }} // Use your Cloudinary/Local hero path
       >
         <div className="absolute inset-0 bg-black/10" /> {/* Subtle overlay for text readability */}
       </div>
@@ -29,9 +30,16 @@ export default function Hero() {
         </Link>
       </div>
       
-      {/* Scroll Indicator - Hidden on Mobile for clean look */}
-      <div className="hidden md:block absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce">
-        <div className="w-[1px] h-12 bg-white/50" />
+      {/* SĂGEATA ACTUALIZATĂ: Mai vizibilă și animată */}
+      <div className="hidden md:flex absolute bottom-10 left-1/2 -translate-x-1/2 flex-col items-center gap-3 animate-bounce cursor-pointer group">
+        <span className="text-[10px] text-white/80 uppercase font-bold tracking-[0.4em] opacity-0 group-hover:opacity-100 transition-opacity">
+          Scroll
+        </span>
+        <ChevronDown 
+          size={48} 
+          strokeWidth={3} 
+          className="text-white drop-shadow-[0_4px_8px_rgba(0,0,0,0.6)]" 
+        />
       </div>
     </section>
   );

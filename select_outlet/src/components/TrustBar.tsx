@@ -23,9 +23,29 @@ const features = [
   },
 ];
 
+/**
+ * TrustBar component that displays a grid of trust/feature indicators.
+ * 
+ * Renders a horizontal bar with icons and text describing key features or trust factors.
+ * The layout is responsive: 2 columns on mobile, 4 columns on medium screens and up.
+ * 
+ * Style breakdown:
+ * - `bg-gray-50 border-y border-gray-100`: Light gray background with top/bottom borders
+ * - `py-10`: Vertical padding for spacing
+ * - `max-w-7xl mx-auto`: Constrains width and centers content
+ * - `px-4`: Horizontal padding for responsive margin
+ * - `grid grid-cols-2 md:grid-cols-4 gap-8`: Responsive grid layout with spacing between items
+ * - `flex flex-col items-center text-center`: Flexbox column layout, centered alignment
+ * - `space-y-3/1`: Vertical spacing between child elements
+ * - `text-[#C5A059]`: Golden/bronze color for icons
+ * - `uppercase tracking-widest/tighter`: All caps text with letter spacing
+ * - `font-extrabold`: Bold font weight for titles
+ * 
+ * @returns {JSX.Element} A trust indicator bar component
+ */
 export default function TrustBar() {
   return (
-    <div className="bg-gray-50 border-y border-gray-100 py-10">
+    <div className="bg-gray-100 border-y border-gray-100 py-5">
       <div className="max-w-7xl mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-8">
         {features.map((f, i) => (
           <div key={i} className="flex flex-col items-center text-center space-y-3">

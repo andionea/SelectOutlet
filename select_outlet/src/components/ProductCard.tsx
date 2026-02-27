@@ -25,15 +25,15 @@ export default function ProductCard({ product }: { product: Product }) {
       {/* 1. Navigable Area: Clicking the image or text goes to the product page */}
       <Link href={`/product/${product.id}`} className="block">
         {/* Visual Badges (Urgency Layer - Inspired by outletmag.ro) */}
-        <div className="absolute top-0 left-0 z-10 flex flex-col">
-          {discount > 0 && (
-            <div className="bg-brand-red text-white text-[10px] font-black px-3 py-1.5 uppercase tracking-tighter">
-              -{discount}% OFF
+        <div className="absolute top-0 left-0 z-10 flex flex-col gap-0">
+          {product.isNew && (
+            <div className="bg-brand-black text-[#C5A059] text-[15px] font-bold px-3 py-1.5 uppercase tracking-tighter">
+              Nou
             </div>
           )}
-          {product.isNew && (
-            <div className="bg-brand-black text-white text-[10px] font-bold px-3 py-1.5 uppercase tracking-tighter">
-              New Entry
+          {discount > 0 && (
+            <div className="bg-brand-red text-red-700 text-[15px] font-black px-3 py-1.5 uppercase tracking-tighter">
+              -{discount}%
             </div>
           )}
         </div>
@@ -51,7 +51,7 @@ export default function ProductCard({ product }: { product: Product }) {
           {/* Quick-view overlay appearing on hover */}
           <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all duration-300 flex items-end">
             <div className="w-full bg-brand-black text-white py-4 text-[11px] font-bold uppercase tracking-widest translate-y-full group-hover:translate-y-0 transition-transform duration-300 flex items-center justify-center gap-2">
-              <ShoppingCart size={14} /> Quick View
+              <ShoppingCart size={24} /> Quick View
             </div>
           </div>
         </div>

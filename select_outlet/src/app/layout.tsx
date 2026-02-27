@@ -4,6 +4,7 @@ import CartDrawer from '../components/CartDrawer';
 import { Geist } from "next/font/google";
 import "./globals.css";
 import Navbar from "../components/Navbar"; 
+import Footer from '../components/Footer';
 
 const geistSans = Geist({
   subsets: ["latin"],
@@ -21,6 +22,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <main className="min-h-screen">
           {children}
         </main>
+
+        <Footer />
         
         <CartDrawer isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
       </body>
