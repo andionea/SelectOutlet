@@ -1,30 +1,83 @@
-import { Instagram, Facebook, Play } from 'lucide-react';
-import Image from 'next/image';
+"use client";
+import { Instagram, Facebook } from "lucide-react";
+import Image from "next/image";
+import Script from "next/script";
+import { useEffect } from "react";
+
+declare global {
+  interface Window {
+    ttEmbedByteDance?: {
+      prepareEmbeds: () => void;
+    };
+    instgrm?: {
+      Embeds: {
+        process: () => void;
+      };
+    };
+  }
+}
 
 const SOCIAL_LINKS = [
-  { name: 'Facebook', icon: <Facebook size={18} />, url: '#', color: 'bg-blue-50 text-blue-600' },
-  { name: 'Instagram', icon: <Instagram size={18} />, url: '#', color: 'bg-orange-50 text-pink-600' },
-  { name: 'TikTok', icon: <span className="font-bold">TikTok</span>, url: '#', color: 'bg-gray-50 text-black' },
+  {
+    name: "Facebook",
+    icon: <Facebook size={18} />,
+    url: "#",
+    color: "bg-blue-50 text-blue-600",
+  },
+  {
+    name: "Instagram",
+    icon: <Instagram size={18} />,
+    url: "#",
+    color: "bg-orange-50 text-pink-600",
+  },
+  {
+    name: "TikTok",
+    icon: <span className="font-bold">TikTok</span>,
+    url: "#",
+    color: "bg-gray-50 text-black",
+  },
 ];
 
 const FEED_ITEMS = [
-  { id: 1, type: 'video', thumbnail: '/social-1.jpg' },
-  { id: 2, type: 'video', thumbnail: '/social-2.jpg' },
-  { id: 3, type: 'video', thumbnail: '/social-3.jpg' },
+  {
+    id: 1,
+    type: "instagram",
+    embedUrl: "https://www.instagram.com/reel/DTFBwzkDGLr/embed",
+  },
+  {
+    id: 2,
+    type: "tiktok",
+    videoId: "7610781748464471318", 
+  },
+  {
+    id: 3,
+    type: "instagram",
+    embedUrl: "https://www.instagram.com/reel/DRSIrmKDLsS/embed",
+  },
 ];
 
 export default function SocialSection() {
+  // This ensures TikTok re-renders the embed if the component updates
+  useEffect(() => {
+    if (window.ttEmbedByteDance) {
+      window.ttEmbedByteDance.prepareEmbeds();
+    }
+  }, []);
+
   return (
     <section className="bg-white py-16 border-t border-gray-100">
+      {/* TikTok SDK Script */}
+      <Script src="https://www.tiktok.com/embed.js" strategy="afterInteractive" />
+
       <div className="max-w-7xl mx-auto px-4">
-        
-        {/* Partea de butoane "Follow" inspirată de giafashion.ro */}
         <div className="bg-white border border-gray-100 rounded-2xl p-8 mb-16 shadow-sm text-center">
-          <h3 className="text-[#C5A059] font-bold text-lg mb-2">Fii prima care vede noutățile Select Outlet</h3>
+          <h3 className="text-[#C5A059] font-bold text-lg mb-2">
+            Fii prima care vede noutățile Select Outlet
+          </h3>
           <p className="text-gray-400 text-xs uppercase tracking-widest mb-8">
             Urmărește-ne pe social media pentru lansări și oferte exclusive.
           </p>
-          
+
           <div className="flex flex-col md:flex-row justify-center gap-4">
             {SOCIAL_LINKS.map((link) => (
               <a
@@ -39,7 +92,6 @@ export default function SocialSection() {
           </div>
         </div>
 
-        {/* Feed Vizual (Din TikTok-ul/Instagram-ul nostru) */}
         <div className="text-center mb-10">
           <h4 className="flex items-center justify-center gap-2 text-xl font-black uppercase tracking-tighter">
             🎬 Din Social Media-ul nostru
@@ -48,23 +100,49 @@ export default function SocialSection() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {FEED_ITEMS.map((item) => (
-            <div key={item.id} className="group relative aspect-[9/16] bg-gray-100 rounded-2xl overflow-hidden shadow-lg transition-all hover:shadow-2xl">
-              {/* Placeholder pentru thumbnail - va folosi imaginile tale reale */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent z-10 opacity-0 group-hover:opacity-100 transition-opacity" />
-              
-              <div className="absolute inset-0 flex items-center justify-center z-20 opacity-0 group-hover:opacity-100 transition-opacity">
-                <div className="w-12 h-12 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center text-white border border-white/30">
-                  <Play fill="white" size={20} />
+            <div
+              key={item.id}
+              className="group relative aspect-[9/16] bg-black rounded-2xl overflow-hidden shadow-lg transition-all hover:shadow-2xl"
+            >
+              {item.type === "instagram" ? (
+                <iframe
+                  src={item.embedUrl}
+                  width="100%"
+                  height="100%"
+                  frameBorder="0"
+                  allowFullScreen
+                  className="w-full h-full"
+                />
+              ) : (
+                <div className="w-full h-full tiktok-wrapper">
+                  <blockquote 
+                    className="tiktok-embed" 
+                    cite={`https://www.tiktok.com/video/${item.videoId}`} 
+                    data-video-id={item.videoId}
+                    style={{ width: '100%', height: '100%' }}
+                  >
+                    <section></section>
+                  </blockquote>
                 </div>
-              </div>
-
-              <div className="absolute bottom-4 left-4 z-20 text-white text-[10px] font-bold uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">
-                View profile
-              </div>
+              )}
             </div>
           ))}
         </div>
       </div>
+      
+      {/* Add custom CSS to hide the ugly scrollbars often found in TikTok embeds */}
+      <style jsx global>{`
+        .tiktok-embed {
+          margin-top: 0 !important;
+          margin-bottom: 0 !important;
+          max-width: 100% !important;
+          height: 100% !important;
+        }
+        .tiktok-wrapper iframe {
+          height: 100% !important;
+          width: 100% !important;
+        }
+      `}</style>
     </section>
   );
 }
