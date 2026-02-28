@@ -31,7 +31,7 @@ export default function ProductCard({ product }: { product: Product }) {
               Nou
             </div>
           )}
-          {discount > 0 && (
+          {product.hasDiscount && discount > 0 && (
             <div className="bg-brand-red text-red-700 text-[15px] font-black px-3 py-1.5 uppercase tracking-tighter">
               -{discount}%
             </div>
