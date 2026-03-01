@@ -23,14 +23,27 @@ import { ChevronDown } from 'lucide-react';
  * - Responsive typography: Scales from text-4xl (mobile) to text-8xl (desktop)
  */
 export default function Hero() {
+
+  // Aceste URL-uri ar trebui să vină ideal din Google Sheets (ex: HeroMobileURL și HeroDesktopURL)
+  const desktopImage = "https://res.cloudinary.com/dff92deol/image/upload/v1772385331/Design_f%C4%83r%C4%83_titlu_1_jeto80.svg"; 
+  const mobileImage = "https://res.cloudinary.com/dff92deol/image/upload/v1772391301/Hero_phone_gez7z5.svg";
+
   return (
     <section className="relative w-full h-[70vh] md:h-[85vh] bg-gray-100 overflow-hidden">
-      {/* Background Image - Styled to stay centered on all screens */}
+      {/* IMAGINE DESKTOP: Vizibilă doar de la 'md' în sus */}
       <div 
-        className="absolute inset-0 bg-cover bg-center md:bg-fixed"
-        style={{ backgroundImage: "url('https://res.cloudinary.com/dff92deol/image/upload/v1772385331/Design_f%C4%83r%C4%83_titlu_1_jeto80.svg')" }}
+        className="hidden md:block absolute inset-0 bg-cover bg-center md:bg-fixed"
+        style={{ backgroundImage: `url(${desktopImage})` }}
       >
-        <div className="absolute inset-0 bg-black/10" /> {/* Subtle overlay for text readability */}
+        <div className="absolute inset-0 bg-black/20" />
+      </div>
+
+      {/* IMAGINE MOBIL: Vizibilă doar pe ecrane mici */}
+      <div 
+        className="block md:hidden absolute inset-0 bg-cover bg-center"
+        style={{ backgroundImage: `url(${mobileImage})` }}
+      >
+        <div className="absolute inset-0 bg-black/25" />
       </div>
 
       {/* Content Container */}
