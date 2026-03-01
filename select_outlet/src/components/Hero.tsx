@@ -26,7 +26,7 @@ export default function Hero() {
 
   // Aceste URL-uri ar trebui să vină ideal din Google Sheets (ex: HeroMobileURL și HeroDesktopURL)
   const desktopImage = "https://res.cloudinary.com/dff92deol/image/upload/v1772385331/Design_f%C4%83r%C4%83_titlu_1_jeto80.svg"; 
-  const mobileImage = "https://res.cloudinary.com/dff92deol/image/upload/v1772391301/Hero_phone_gez7z5.svg";
+  const mobileImage = "https://res.cloudinary.com/dff92deol/image/upload/v1772396255/Hero_phone_1_lrxvfb.svg";
 
   return (
     <section className="relative w-full h-[70vh] md:h-[85vh] bg-gray-100 overflow-hidden">
